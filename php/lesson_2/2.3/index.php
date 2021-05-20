@@ -28,9 +28,19 @@ echo 'сумма ' . summ(8, 2);
 
 echo '<hr>' ;
 
-  function division($a, $b){
-      $r = $a / $b;
-      return $r;
+function division($a, $b){
+
+     if ( $a == 0 ) {
+
+         $err = '<p>Делить на ноль нельзя !</p>';
+         echo $err ;
+         
+     } else {
+
+         $r = $a / $b;
+         return $r;
+     }
+      
    };
 echo 'деление ' . division(8, 2);
 

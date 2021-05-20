@@ -11,19 +11,29 @@ function mathOperation($arg1, $arg2, $operation){
           case 'сложение':
               return $arg1 + $arg2;
               break;
+
           case 'вычитание':
               return $arg1 - $arg2;
             break;
-        case 'деление':
-                      return $arg1 / $arg2;
+
+          case 'деление':
+                      if ( $arg1 == 0 ) {
+
+                          $err = '<p>Делить на ноль нельзя !</p>';
+                          echo $err ;
+
+                      } else {
+                        return $arg1 / $arg2;
+                      };
             break;
+
           case 'умножение':
               return $arg1 * $arg2;
             break;
      }
 }
 
-echo mathOperation(8,9,'сложение')  ;
+echo mathOperation(0,9,'деление')  ;
 
 echo '<hr>' ;
 
