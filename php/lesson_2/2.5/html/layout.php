@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?=$layout?>
+    <?=$about?>
+    <?=$menu?>
 </body>
 </html>

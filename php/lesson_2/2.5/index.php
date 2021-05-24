@@ -1,20 +1,19 @@
 <?php 
 
-function renderTemplate( $page , $content = '' )
+function renderTemplate( $page , $content = '', $menu = '', $about = ''  )
 {
    ob_start();
-   include "html/" . $page . ".php";
+   include 'html/' . $page . ".php";
    return ob_get_clean();
 }
 
-$layout = renderTemplate('/layout');
-$about = renderTemplate('about');
+$layout = renderTemplate('layout');
 $menu = renderTemplate('menu');
+$about = renderTemplate('about');
 
 
 
-echo renderTemplate( 'layout' , $layout );
-echo renderTemplate( 'menu' , $menu );
-echo renderTemplate( 'about' , $about );
+echo renderTemplate( 'layout' , $layout , $menu , $about  );
+
 
 ?>
