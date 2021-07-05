@@ -1,28 +1,47 @@
 <?php
 
 
-function render($page, $params = [])
-{
-    return renderTemplate(LAYOUTS_DIR . 'main', [
-        'menu' => renderTemplate('menu', $params),
-        'content' => renderTemplate($page, $params)
+
+function render($page, $params = [], $layout = 'layout' )
+{   
+   
+   
+    
+    return renderTemplate( LAYOUTS_DIR . $layout, [
+        
+        
+
+        'content' => renderTemplate( TEMPLATES_DIR . $page, $params),
+        'menu' => renderTemplate(TEMPLATES_DIR . 'menu')
+        
     ]);
 }
 
 function renderTemplate($page, $params = [])
 {
-
-    //$params = ['menu' => 'код меню', 'catalog' => ['чай'], 'content' => 'Код подшаблона']
-    extract($params);
-    /* foreach ($params as $key => $value) {
-         $$key = $value;
-     }
-     */
     ob_start();
-    $fileName = TEMPLATES_DIR . $page . ".php";
+
+    if (!is_null($params))   
+        extract($params);
+    
+    
+    $fileName = $page . ".php";
+    
+   
+
     if (file_exists($fileName)) {
+
+       
+
         include $fileName;
     }
 
     return ob_get_clean();
+}
+
+
+function getOneImage ($id)
+{
+   
+    return getAssocResult('SELECT img_name FROM imgCatalog')[0]['img_name'];
 }

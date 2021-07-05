@@ -1,8 +1,8 @@
 <?php
-include "../config/config.php";
 
-//Читаем параметр page из url, чтобы определить, какую страницу-шаблон
-//хочет увидеть пользователь, по умолчанию это будет index
+
+define('ROOT', dirname(__DIR__).'/');
+include ROOT . "config/config.php";
 
 $url_array = explode('/', $_SERVER['REQUEST_URI']);
 
@@ -15,32 +15,37 @@ $params = [
     'name' => 'Админ'
 ];
 
-switch ($page) {
 
+
+$layout = 'layout';
+
+switch ($page) {
+    
     case 'index':
         break;
 
     case 'catalog':
         $params['catalog'] = getCatalog();
+        break;    
+
+    case 'gallery':
+        
+        $layout = 'gallery' ;
+
+        $params['gallery_img'] = getGallery();
+
+        
         break;
 
-    case 'files':
-       // if ($_POST[$_FILES]) {
-            //upload();
-           /// header();
-      //  }
-       // $params['message'] = $mes[$_GET['message']];
-        $params['files'] = getGallery();
-        break;
-
-    case 'news':
-        $params['news'] = getNews();
-        break;
-
-    case 'newsone':
+    case 'image':
+        
+        
         $id = (int)$_GET['id'];
-        $params['news'] = getOneNews($id);
+        $params['img_name'] = getOneNews($id);
+        
+
         break;
+
 
     case 'apicatalog':
         echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
@@ -51,4 +56,6 @@ switch ($page) {
 _log($params, 'params');
 
 
-echo render($page, $params);
+
+echo render($page, $params, $layout);
+
